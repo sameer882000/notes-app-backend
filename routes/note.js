@@ -10,12 +10,21 @@ router.get('/', auth,  async (req, res) => {
 });
 
 router.post('/', auth,  async (req, res) => {
-  const newNote = new Note({
-    title: req.body.title,
-    content: req.body.content,
-  });
-  await newNote.save();
-  res.json(newNote);
+    const { title, content } = req.body;
+
+    try {
+      const newNote = new Note({
+        title,
+        content,
+        createdBy: req.user.id, // Set createdBy to the authenticated user's ID
+      });
+
+      const savedNote = await newNote.save();
+      res.status(201).json(savedNote);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Server error" });
+    }
 });
 
 // Update a note by ID

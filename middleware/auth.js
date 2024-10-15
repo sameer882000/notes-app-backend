@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const jwtSecret = "samplejwtsecret";
 
-function auth(req, res, next) {
+const auth = async (req, res, next) => {
   const token = req.header("x-auth-token");
 
   if (!token) {
@@ -10,7 +10,7 @@ function auth(req, res, next) {
 
   try {
     const decoded = jwt.verify(token, jwtSecret);
-    req.user = decoded;
+     req.user = await User.findById(decoded.id).select('-password');
     next();
   } catch (error) {
     res.status(401).json({ msg: "Token is not valid" });
