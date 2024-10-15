@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const noteRoutes = require('./routes/note');
+const loginRoutes = require('./routes/user');
 const connection = require('./connection');
 
 const app = express();
@@ -21,6 +22,7 @@ connection.connect().then(() => {
     console.log('Error connecting to database', err);
 });
 
+app.use('/', loginRoutes);
 
 // Routes
 app.use('/notes', noteRoutes);
