@@ -5,8 +5,12 @@ const auth = require("../middleware/auth");
 
 
 router.get('/', auth,  async (req, res) => {
-  const notes = await Note.find();
-  res.json(notes);
+ try {
+   const notes = await Note.find({ createdBy: req.user.id }); // Only fetch notes created by the authenticated user
+   res.json(notes);
+ } catch (error) {
+   res.status(500).json({ error: "Error fetching notes" });
+ }
 });
 
 router.post('/', auth,  async (req, res) => {
