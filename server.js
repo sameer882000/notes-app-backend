@@ -9,7 +9,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const corsOptions = {
-  origin: "http://localhost:4200", // Allow requests from your frontend
+  origin: ["http://localhost:4200", "https://notes-app-tau-five-81.vercel.app/"], // Allow requests from your frontend
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Specify allowed methods
   allowedHeaders: ["Content-Type", "Authorization"],
 };
