@@ -8,7 +8,13 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+const corsOptions = {
+  origin: "http://localhost:4200", // Allow requests from your frontend
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Specify allowed methods
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
 
+app.use(cors(corsOptions));
 connection.connect().then(() => {
     console.log('Connected to database');
 }).catch((err) => {
