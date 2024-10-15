@@ -13,6 +13,7 @@ const auth = async (req, res, next) => {
      req.user = await User.findById(decoded.id).select('-password');
     next();
   } catch (error) {
+    console.log(error);
     res.status(401).json({ msg: "Token is not valid" });
   }
 }
