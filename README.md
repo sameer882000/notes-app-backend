@@ -7,7 +7,7 @@ This is the backend of the Notes App, built with Node.js and Express.js. The bac
 
 - [Features](#features)
 - [Technologies Used](#technologies-used)
-- 
+  
 ## Features
 
 - User authentication with JWT (JSON Web Token).
